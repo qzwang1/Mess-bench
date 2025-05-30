@@ -48,3 +48,8 @@ echo -1 > /proc/sys/kernel/perf_event_paranoid
 ## Refrences
 
 [[1]](https://www.bsc.es/supportkc/docs/MareNostrum4/intro/ ) [https://www.bsc.es/supportkc/docs/MareNostrum4/intro/](https://www.bsc.es/supportkc/docs/MareNostrum4/intro/ ) 
+
+
+for cpu in $(cat /sys/devices/system/cpu/cpu*/topology/thread_siblings_list | cut -d',' -f2 | sort -n | uniq); do
+    echo 0 | sudo tee /sys/devices/system/cpu/cpu$cpu/online
+done
